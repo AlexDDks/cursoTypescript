@@ -1,10 +1,10 @@
 //FUNCTION (SIEMPRE UTILIZAN ANOTACIONES)
-//Siempre utilizan ya que en algunos casos como en funciones, TS no avisa que cometimos el error de no colocar un RETURN, por lo que podríamos no encontrar el bug
+//Siempre utilizan ya que en algunos casos, TS no avisa que cometimos el error de no colocar un RETURN, por lo que podríamos no encontrar el bug
 //A la variable logNumber(no a la función) se le asigna un valor de los argunmentos de tipo number y un retorno de tipo nunguno (void); :(i:number)=>void 
 const logNumber1:(i:number)=>void = (i:number) => {
   console.log(i);
 };
-//Otro ejemplo, acá la anotación es para la función, no para los argumentos
+//Otro ejemplo, acá la anotación es para la función, no para la variable
 const add1 = (a:number , b:number):number =>{
   //Se ha agregado la anotación para los argumentos y después de los : para el return que igualmente es un número
 return a + b;
