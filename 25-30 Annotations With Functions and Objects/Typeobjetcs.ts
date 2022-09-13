@@ -21,4 +21,4 @@ const{coords:{lat, long}} : {coords:{lat:number, long:number}}= profile
 
 //ERROR DEL EJEMPLO ANTERIOR
 const {age,name}:{number}=profile 
-//Podemos observar el error, por lo tanto debemos declarar que X es un tipo, Y es otro tipo, etc
+//Podemos observar el error debido a que el destructuring se está haciendo con 2 tipos de valores diferentes y únicamente colocamos la anotación para el primer argumento que sería un número, por lo tanto debemos declarar que X es un tipo, Y es otro tipo, etc

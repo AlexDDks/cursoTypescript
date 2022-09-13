@@ -42,7 +42,7 @@ let point:{x:number; y:number}={
 const logNumber:(i:number)=>void = (i:number) => {
   console.log(i);
 }
-//Otro ejemplo, acá la anotación es para la función, no para la variable
+//Otro ejemplo, acá la anotación es para la función(sus argumentos y su return), no para la variable
 const add = (a:number , b:number):number =>{
   //Se ha agregado la anotación para los argumentos y después de los : para el return que igualmente es un número
 return a + b;
@@ -90,9 +90,9 @@ if(words[i]==="green"){
 }
 
 // Ejemplo mio: acá quise meter la declaración e inicialización de la variable dentro del if, pero si nos damos cuenta este valor nunca se lee ya que es una let dentro de un bloque de código
-let words1=["red","green", "blue"];
-for(let i=0; i<words.length; i++){
-if(words[i]==="green"){
+let words2=["red","green", "blue"];
+for(let i=0; i<words2.length; i++){
+if(words2[i]==="green"){
   let foundWord1:boolean=true;
 }
 }
