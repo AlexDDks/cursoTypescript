@@ -6,7 +6,6 @@ class Vehicle{
   
   //Acá estamos creando un método llamado drive, el cual es ejecutado en la última línea de este bloque, como vemos no tiene ningún argumento, únicamente va a mostrar en consola una cadena de texto
   drive():void{
-    // No me queda claro por qué, pero podemos declarar una función sin ningún tipo de argumento de la manera que se presenta arriba, no se le coloca ninguna anotacion relacionada a los argumentos
     console.log("código prueba de instancia");
   }  
 
@@ -28,6 +27,7 @@ vehicle.honk();
 
 //Creamos una nueva clase llamada Car que queremos que tena los mismos métodos que el de Vehicle, por lo tanto podemos copiar todo el código de nuevo, o lo mas apropiado: extender los métodos de la clase Vehicle en la clase Car, prácticamente se "copia y pega el código"
 class Car extends Vehicle{}
+
 // Normalmente se le dice a estas clases que son extensiones de otras; "Hijos", osea la clase Car es una clase hija de la clase padre Vehicle
 
 // Instanciamos
@@ -52,24 +52,26 @@ class Vehicle1{
 }
 
 
-//MODIFIER private: hemos puesto la clase Car1 en privada y por lo tanto sus métodos sólo pueden ser utilizados dentro de la clase
-// Tenemos un error ya que el método drive tiene un modificador diferente que su clase padre, por lo que hay que modificarlo. Para efectos del curso y seguir la secuencia, omito arreglar este bloque de código
+//MODIFIER private: hemos puesto el médoto driva de la clase Car1 en privada y por lo tanto sus métodos sólo pueden ser utilizados dentro de la clase
+// Tenemos un error ya que el método drive tiene un modifier diferente que el mismo método de su clase padre(está en public), por lo que hay que modificarlo. Para efectos del curso y seguir la secuencia, omito arreglar este bloque de código
 class Car1 extends Vehicle1{
   private drive():void{
     console.log("STRING PISADA POR CAR1");
   } 
-  //El método stratDrivingProcess SÍ PUEDE LLAMAR a la función/método drive ya que se encuentra dentro de la case
+  //El método stratDrivingProcess SÍ PUEDE LLAMAR a la función/método drive ya que se encuentra dentro de la clase (indispensable para llamar a un método en private)
+  // TENEMOS OBLIGATORIAMENTE QUE CREAR ESTE NUEVO MÉTODO(public) QUE LLAME A drive(privado/protected) para poder utilizar a este último a pesar de que esté protected o privated, fuera de la clase, ya que será en startDrivingProcess el método que SÍ ESTÁ DENTRO DE LA CLASE donde podemos llamar a todos los demás métodos private o protected
   startDrivingProcess():void{
-  // Acá sí podemos utilizar el método drive ya que estamos dentro de la clase
+  // Acá sí podemos llamar/utilizar y ejecutar el método drive ya que estamos dentro de la clase Car
   this.drive()
   }
 }
 
+// Instanciamos a Car1 para poder utilizar sus métodos
 const car1= new Car1();
 // No podemos utilizar el método drive ya que este es privado
 // car1.drive()
 
-// Como drive es privado, podemos hacer uso de otro método que está dentro del código y que llama al método drive. Sí podemos utilizar este método startDrivingProcess ya que es público en la clase Car1
+// Como drive es privado, podemos hacer uso de otro método que está dentro del código y que llama al método drive. Sí podemos utilizar este método startDrivingProcess ya que es público en la clase Car1(instanciado en car1)
 car1.startDrivingProcess()
 
 // La razón por la que se ponen algunos métodos en privado es para que no sean llamados por otros desarrolladores, ya que podrían haber algún tipo de bug o algo similar si alguien sin la experiencia de nosotros intenta llamarlos
@@ -91,7 +93,7 @@ class Car2 extends Vehicle2{
   }
 }
 
-// Nos podemos dar cuenta que debido a que el método honk es protected, no podemos llamarl fuera de la clase y de sus clases hijas
+// Nos podemos dar cuenta que debido a que el método honk es protected, no podemos llamarla fuera de la clase y de sus clases hijas
 const vehicle2= new Vehicle2
 vehicle2.honk() 
 

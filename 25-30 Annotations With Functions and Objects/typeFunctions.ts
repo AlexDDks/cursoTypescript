@@ -10,7 +10,7 @@ const add1 = (a:number , b:number):number =>{
 return a + b;
 };
 
-//Otro ejemplo para funciones no declaradas
+//Otro ejemplo para funciones no asignada
 function divide(a:number ,b:number):number{
   return a/b;
 };

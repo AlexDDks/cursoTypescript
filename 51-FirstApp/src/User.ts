@@ -10,4 +10,15 @@ location: {
     lat:number;
     lng:number;
 };
+constructor(){
+    this.name=faker.name.firstName();
+
+    // Debido a que anteriormente no inicializamos nuestro location, TS no sabe que se trata de un objeto por lo que la inicializamos al igual que inicializamos el name anterior
+    this.location={
+        // Debido a cómo fue creado, lat y lgn son strings en el faker, pero nosotros le hemos dicho a TS mediante anotaciones que espere un número, entonces con el parseFloat se convierte a number un string dado
+        lat: parseFloat(faker.address.latitude()),
+        lng: parseFloat(faker.address.longitude())
+    }
+
+}
 }

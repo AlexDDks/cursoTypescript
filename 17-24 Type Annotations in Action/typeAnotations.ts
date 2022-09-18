@@ -1,5 +1,5 @@
 //A la variable apples se le asigna un valor de tipo number
-let apples:number =5;
+let apples:number =9;
 
 //Así sucesivamente
 let speed:string= "19km/k";

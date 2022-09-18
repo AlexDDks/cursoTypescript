@@ -48,3 +48,14 @@ class Car5 extends Vehicle5{
 const car5 = new Car5(4,"yellow")
 //Acá comprobamos que todo está chido
 console.log(car5.wheels, car5.color)
+
+
+// Ejemplo mío
+class Car6 extends Vehicle5{
+    // Obligatoriamente tenemos que poner que sea public para que sea leído fuera del código
+    constructor(public weigth:number, color:string){
+        super(color)
+    }
+}
+const car6= new Car6(1000, "black")
+console.log(car6.weigth, car6.color);

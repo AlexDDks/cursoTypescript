@@ -1,4 +1,4 @@
-// En general cuando usamos arrays en TS, sólo utilizamos un tipo, si quieremos agregar más, entonces tenemos que agregar anotaciones especiales
+// En general cuando usamos arrays en TS, utilizamos únicamente un tipo para todos los índices si quieremos agregar más, entonces tenemos que agregar anotaciones especiales
 
 // Acá la inferencia ya está trabajando, no es necesario agregar anotaciones
 const carMakers=["Ford", "Toyota", "Nissan"]
