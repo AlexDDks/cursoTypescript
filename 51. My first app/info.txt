@@ -1,0 +1,11 @@
+1. The first thing whe done was to install : npm install -g parcel-bundler in the folder of the project, in order to execute TS in the browser, something such as node for JS.
+
+2. Parcel will covert our .ts file into .js, with the help of an HTML file with an script to our .ts project, cause raw TS code can't be compiled in the browser
+
+3. To compile the app, whe need to write: parcel "name of html".html
+
+4. In order to inicialite the properties of the class user in a random way, we used the library faker:  npm install faker@5.5.3
+
+5. We import faker from node modules
+
+6. Because TS is a particullar lenguage, it can be aware about all the variables and returns of the methds that we will use, if not, TS can not check our code, so faker and others libraries of JS do not have annotations and all that information that TS needs, so we need to use "type definition files" which are some kind of "adapter" that tells to TS the information about the type or arguments and returns. Some libraries does includes the type definition file, but in this case, fakee does not, so we need to install it manually. The way we need to go through is: npm install @types/"name of library", following this sintaxis, in our case it must be: npm install @types/faker@5.5.9
