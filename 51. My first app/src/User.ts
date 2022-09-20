@@ -9,7 +9,9 @@ export class User{
         lng:number;
     }
 
-    // En la documentación vamos a encontrar qué modulo utilizar para cada propiedad de nuestra clase, por lo que basta revisarlo para ver cómo llegar a ella
+    // En la documentación vamos a encontrar qué modulo utilizar para cada propiedad de nuestra clase, por lo que basta revisarlo para ver cómo llegar a ella.
+    
+    //En este paso indicamos el valor de las propiedades las cuales serán inicializadas cuando se instancie la clase en el archivo index.ts
     constructor(){
         this.name=faker.name.firstName();
         this.location={
