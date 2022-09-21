@@ -21,3 +21,16 @@ export class User{
         }
     }
 }
+
+// // En JS el constructor se coloca como:
+
+// function Cliente(nombre, fecha, direccion) // { Esta línea funciona como la palabra reservada constructor(), pero no recibe parámetros ya que se inicializa cuando la clase es instanciada en el index.ts
+ 
+//     this._nombre = nombre;
+//     this._fechaNacimiento = fecha;
+//     this._direccion = direccion;
+// }
+
+// // Instanciando:
+
+// const cliente= new Cliente(nombre, fecha, direccion)

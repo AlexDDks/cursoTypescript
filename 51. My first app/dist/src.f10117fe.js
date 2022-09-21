@@ -136903,7 +136903,14 @@ function () {
   return User;
 }();
 
-exports.User = User;
+exports.User = User; // // En JS el constructor se coloca como:
+// function Cliente(nombre, fecha, direccion) // { Esta línea funciona como la palabra reservada constructor(), pero no recibe parámetros ya que se inicializa cuando la clase es instanciada en el index.ts
+//     this._nombre = nombre;
+//     this._fechaNacimiento = fecha;
+//     this._direccion = direccion;
+// }
+// // Instanciando:
+// const cliente= new Cliente(nombre, fecha, direccion)
 },{"faker":"node_modules/faker/index.js"}],"src/Company.ts":[function(require,module,exports) {
 "use strict";
 
@@ -136936,15 +136943,50 @@ function () {
   return Company;
 }();
 
-exports.Company = Company;
-},{"faker":"node_modules/faker/index.js"}],"src/index.ts":[function(require,module,exports) {
-"use strict"; /// <reference types="@types/google.maps" />
+exports.Company = Company; // // En JS el constructor se coloca como:
+// function Cliente(nombre, fecha, direccion) // { Esta línea funciona como la palabra reservada constructor(), pero no recibe parámetros ya que se inicializa cuando la clase es instanciada en el index.ts
+//     this._nombre = nombre;
+//     this._fechaNacimiento = fecha;
+//     this._direccion = direccion;
+// }
+// // Instanciando:
+// const cliente= new Cliente(nombre, fecha, direccion)
+},{"faker":"node_modules/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
+"use strict"; // Acá estamos haciendo una clase que únicamente guarde las propiedades y métodos que necesitamos del objeto global Map. Esto es debido a que si otro ingeniero viene y comienza a trabajar en nuestro proyecto con todos los métodos que residen en esa clase, entonces el resultado podría ser catastrófico y pudiéramos llegar a romper por completo la app
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-}); // You can read about this in the official docs here:
+});
+exports.CustomMap = void 0; // Creamos una clase para exportar que únicamente tenga las propiedades que necesitamos y así esconder el resto de la clase original Map
+
+var CustomMap =
+/** @class */
+function () {
+  // En el constructor agregamos como argumento el div, que es lo que tenemos como argumento en el new, con ello podemos hacer nuestro código aún mas reutilizable
+  function CustomMap(divId) {
+    this.googleMap = new google.maps.Map(document.getElementById(divId), //En el get Element irá lo que coloquemos al instanciar, que será el divId osea "map"
+    {
+      zoom: 1,
+      center: {
+        lat: 0,
+        lng: 0
+      }
+    });
+  }
+
+  return CustomMap;
+}();
+
+exports.CustomMap = CustomMap;
+},{}],"src/index.ts":[function(require,module,exports) {
+"use strict"; /// <reference types="@types/google.maps" />
+// El por qué de la línea uno está explicado aquí:
+// You can read about this in the official docs here:
 // https://developers.google.com/maps/documentation/javascript/using-typescript#Module_Import
-// De esta manera se importa una clase en TS, lo que hace es ir al archivo ./User, buscar ahí algo llamado User y jalarlo a este archivo como una variable llamada User. SIEMPRE QUE EXPORTERMOS MEDIANTE LA PALABRA export, tenemos que colocar las llaves y dentro de ellas la variable que buscamos y a dónde se va a guardar. Esto no aplica para módulos de 3os, como el faker.
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+}); // De esta manera se importa una clase en TS, lo que hace es ir al archivo ./User, buscar ahí algo llamado User y jalarlo a este archivo como una variable llamada User. SIEMPRE QUE EXPORTERMOS MEDIANTE LA PALABRA export, tenemos que colocar las llaves y dentro de ellas la variable que buscamos y a dónde se va a guardar. Esto no aplica para módulos de 3os, como el faker.
 
 var User_1 = require("./User");
 
@@ -136954,9 +136996,10 @@ var Company_1 = require("./Company"); //Procedemos a instanciar el User (recorde
 var user = new User_1.User();
 console.log(user);
 var company = new Company_1.Company();
-console.log(company); // // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
-// //Instanciamos la clase(en el tdf vimos que es una clase) con esta nueva forma que la verdad no sé cómo se usa
-// new google.maps.Map(document.getElementById('map') as HTMLElement,
+console.log(company); /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA CLASE CustomMap/////////////
+// // // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
+// //map espera un argumento que es un div de un html, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
+// const map = new google.maps.Map(document.getElementById('map') as HTMLElement,
 // // Abriendo unas nuevas llaves, aclaramos que agregaremos un segundo parámetro
 // {
 //     //la clase Map opcionalmente recibe como segundo parámetro el mapOptions que sirve para personalizar el mapa, por lo tanto debemos de ingresarlas desde unas llaves, ya que es un segundo parámetro. El zoom recibe como parámetro un number que es el valor inicial de este.
@@ -136967,17 +137010,15 @@ console.log(company); // // Al igual como hicimos con el faker, podemos entrar a
 //         lng:0 //El centro del mapa será 0,0.
 //     }
 // });
-// //map espera un argumento que es un div de un html, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
+// // La lógica es la siguiente: lo que le demos de argumentos al constructor lo agregará como una propiedad de la clase, en este caso le estamos agregando como primer argumento "map", el cual en el tdf vimos que DEBE DE SER UN ELEMENTO HTML por lo que anteriormente se inicializó como ello. Como segundo argumento se le está agregando un objeto llamado "mapOptions", el cual tiene 2 propiedades que necesitamos: 1)zoom:number y 2:center:lat y lng, todo esto sacado del tdf
+//////////////////////////////////////////////////////////////////////////////////////
+//Instanciamos la clase CustomMap
 
-var map = document.getElementById('map');
-new google.maps.Map(map, {
-  center: {
-    lat: 0,
-    lng: 0
-  },
-  zoom: 1
-});
-},{"./User":"src/User.ts","./Company":"src/Company.ts"}],"C:/Users/52556/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var CustomMap_1 = require("./CustomMap");
+
+var customMap = new CustomMap_1.CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class
+// customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada
+},{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"C:/Users/52556/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -137005,7 +137046,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61872" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58711" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

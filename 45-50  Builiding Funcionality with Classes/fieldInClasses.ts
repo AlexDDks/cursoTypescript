@@ -37,17 +37,17 @@ class Vehicle5{
 const vehicle5 = new Vehicle5("black")
 console.log(vehicle5.color)
 
-class Car5 extends Vehicle5{
-    // Cuando hagamos una función constructor de un hijo, debemos de llamar al constructor del padre con la palabra super(). Podemos observar que hemos agregado un segundo argumento llamador color, el cual está en el argumento de super. Esto se hace para: 1) super recibe como argumento lo que va a utilizar como propiedad en la clase padre, por lo que al nosotros colocar un segundo argumento en nuestro constructor, le decimos que esa será la propiedad que va a recibir el constructor padre. Nótese que hemos utilizado el mismo nombre de la variable como segundo argumento y como argumento del super. Así que cuando nosotros instanciemos, en ese momento los constructor van a ser ejecutados, como primer argumento el del hijo y como segundo el del padre
-    constructor(public wheels:number, color:string){
-        // No asignamos ningún modificador debido a que si colocamos un public por ejemplo, entonces crearemos una nueva propiedad en esta clase y lo que queremos es únicamente decir que al instanciar esta clase vamos a recibir 2 argumentos, el primero como cuenta con el modificador public, SÍ va a crear una nueva propiedad en esta clase, pero el segundo pertenece al padre y será la propiedad que se creará en esta última.
-        super(color);
-    }
-}
+// class Car5 extends Vehicle5{
+//     // Cuando hagamos una función constructor de un hijo, debemos de llamar al constructor del padre con la palabra super(). Podemos observar que hemos agregado un segundo argumento llamador color, el cual está en el argumento de super. Esto se hace para: 1) super recibe como argumento lo que va a utilizar como propiedad en la clase padre, por lo que al nosotros colocar un segundo argumento en nuestro constructor, le decimos que esa será la propiedad que va a recibir el constructor padre. Nótese que hemos utilizado el mismo nombre de la variable como segundo argumento y como argumento del super. Así que cuando nosotros instanciemos, en ese momento los constructor van a ser ejecutados, como primer argumento el del hijo y como segundo el del padre
+//     constructor(public wheels:number, color:string){
+//         // No asignamos ningún modificador debido a que si colocamos un public por ejemplo, entonces crearemos una nueva propiedad en esta clase y lo que queremos es únicamente decir que al instanciar esta clase vamos a recibir 2 argumentos, el primero como cuenta con el modificador public, SÍ va a crear una nueva propiedad en esta clase, pero el segundo pertenece al padre y será la propiedad que se creará en esta última.
+//         super(color);
+//     }
+// }
 
-const car5 = new Car5(4,"yellow")
-//Acá comprobamos que todo está chido
-console.log(car5.wheels, car5.color)
+// const car5 = new Car5(4,"yellow")
+// //Acá comprobamos que todo está chido
+// console.log(car5.wheels, car5.color)
 
 
 // Ejemplo mío

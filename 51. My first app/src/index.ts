@@ -1,5 +1,5 @@
 /// <reference types="@types/google.maps" />
-
+// El por qué de la línea uno está explicado aquí:
 // You can read about this in the official docs here:
 // https://developers.google.com/maps/documentation/javascript/using-typescript#Module_Import
 
@@ -13,10 +13,13 @@ console.log(user);
 const company= new Company();
 console.log(company);
 
-// // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
 
-// //Instanciamos la clase(en el tdf vimos que es una clase) con esta nueva forma que la verdad no sé cómo se usa
-// new google.maps.Map(document.getElementById('map') as HTMLElement,
+/////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA CLASE CustomMap/////////////
+
+// // // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
+
+// //map espera un argumento que es un div de un html, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
+// const map = new google.maps.Map(document.getElementById('map') as HTMLElement,
 // // Abriendo unas nuevas llaves, aclaramos que agregaremos un segundo parámetro
 // {
 //     //la clase Map opcionalmente recibe como segundo parámetro el mapOptions que sirve para personalizar el mapa, por lo tanto debemos de ingresarlas desde unas llaves, ya que es un segundo parámetro. El zoom recibe como parámetro un number que es el valor inicial de este.
@@ -27,11 +30,11 @@ console.log(company);
 //         lng:0 //El centro del mapa será 0,0.
 //     }
 // });
-// //map espera un argumento que es un div de un html, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
+// // La lógica es la siguiente: lo que le demos de argumentos al constructor lo agregará como una propiedad de la clase, en este caso le estamos agregando como primer argumento "map", el cual en el tdf vimos que DEBE DE SER UN ELEMENTO HTML por lo que anteriormente se inicializó como ello. Como segundo argumento se le está agregando un objeto llamado "mapOptions", el cual tiene 2 propiedades que necesitamos: 1)zoom:number y 2:center:lat y lng, todo esto sacado del tdf
 
-const map = document.getElementById('map') as HTMLElement;
- 
-new google.maps.Map(map, {
-  center: { lat: 0, lng: 0 },
-  zoom: 1,
-});
+//////////////////////////////////////////////////////////////////////////////////////
+
+//Instanciamos la clase CustomMap
+import { CustomMap } from "./CustomMap";
+const customMap= new CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class
+// customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada
