@@ -136952,63 +136952,51 @@ exports.Company = Company; // // En JS el constructor se coloca como:
 // // Instanciando:
 // const cliente= new Cliente(nombre, fecha, direccion)
 },{"faker":"node_modules/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
-"use strict";
+"use strict"; //Ver explicación del código en customMap_Bad.ts
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CustomMap = void 0; // Acá estamos haciendo una clase que únicamente guarde las propiedades y métodos que necesitamos del objeto global Map. Esto es debido a que si otro ingeniero viene y comienza a trabajar en nuestro proyecto con todos los métodos que residen en esa clase, entonces el resultado podría ser catastrófico y pudiéramos llegar a romper por completo la app
-// Creamos una clase para exportar que únicamente tenga las propiedades que necesitamos y así esconder el resto de la clase original Map
+exports.CustomMap = void 0;
 
 var CustomMap =
 /** @class */
 function () {
-  //Utilizamos el constructor para inicializar y crear el mapa y mostrarlo en pantalla
-  // En el constructor agregamos como argumento el div, que es lo que tenemos como argumento en el new, con ello podemos hacer nuestro código aún mas reutilizable  
   function CustomMap(divId) {
-    this.googleMap = new google.maps.Map(document.getElementById(divId), //En el get Element irá lo que coloquemos al instanciar, que será el divId osea "map"
-    {
+    this.googleMap = new google.maps.Map(document.getElementById(divId), {
       zoom: 1,
       center: {
         lat: 0,
         lng: 0
       }
     });
-  } // Lo que hicimos está explicado en la carpeta 45-50, archivo fieldInClases, sobre cómo utilizar el constructor
-  //////////////////MAL CAMINO////////////////////
-  //Comenzaremos a diseñar los marcadores, aunque este es el mal camino:
-  // El enfoque que se le quiere dar es el de agregar dos métodos, uno para cada clase; User y Company. Le decimos que va a ser de ese tipo YA QUE POSTERIORMENTE EN EL index.ts VAMOS A EJECUTAR LOS MÉTODOS Y LOS ARGUMENTOS SERÁN LAS INSTANCIAS DE ESAS 2 CLASES
-  //Se coloca como argumento la instancia, y el tipo va a ser la clase. Sí, la clase(la instancia) tiene como dualidad también ser un "tipo", así que podemos usarlo y al mismo tiempo vamos a tener como return un : void
-  //El nombre del argumento puede ser el que sea, pero el tipo debe ser de su clase correspondiente, porque en el index.ts vamos a ejecutar los métodos y estos van a recibir como argumentos a las instancias de User y Company
+  } //add Marker ahora puede recibir CUALQUIER ARGUMENTO SIEMPRE Y CUANDO SATISFAGA A LA INTERFACE INSTANCER 
 
 
-  CustomMap.prototype.addUserMarker = function (user) {
-    // En el tdf se encuentra una clase llamada market. Cuando queramos crear una instancia de marker, podemos opcionalmente colocar argumentos llamados "opts" que deberían ser conformados por la interface markerOptions(por lo que van entre llaves como objeto literal). El primero es map, el cuál recibe el mapa al que se le añadirá al marcador (ya que en una app podríamos tener diferentes mapas) y la segunda es la posición como objeto literal con lat y lng.
-    //Creamos la instancia del marker(ya que es una clase) y ya tenemos inmediatamente todas las propiedades de Marker, y tendremos como argumentos lo que necesita/solicita la función constructora en el tdf
-    new google.maps.Marker({
+  CustomMap.prototype.addMarker = function (instancer) {
+    var _this = this;
+
+    var marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
-        lat: user.location.lat,
-        lng: user.location.lng
+        lat: instancer.location.lat,
+        lng: instancer.location.lng
       }
-    });
-  };
+    }); // Acá comenzamos a agregar la funcionalidad de que cuando hagamos click en los marcadores, salga un TextDecoder. Para ello agregamos como el addListener la funcionalidad de que al hacer click en el marker se ejecute una función. Para que se renderice el texto hacemos uso de la clase InfoWindow que en el tdf vemos que recibe un content que es una propiedad de tipo string(que será el texto a renderizar)
 
-  CustomMap.prototype.addCompanyMarker = function (company) {
-    //Repetimos el código:
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: company.location.lat,
-        lng: company.location.lng
-      }
+    marker.addListener("click", function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Hi world"
+      }); //infoWindow.open recibe las referencias de a qué marcador y mapa nos referimos, por lo que agregamos como argumento el mapa al que le estamos implementando la funcionalidad y el marcador correspondiente.
+
+      infoWindow.open(_this.googleMap, marker);
     });
   };
 
   return CustomMap;
 }();
 
-exports.CustomMap = CustomMap; /////////////////////////////////////////////////
+exports.CustomMap = CustomMap;
 },{}],"src/index.ts":[function(require,module,exports) {
 "use strict"; /// <reference types="@types/google.maps" />
 // El por qué de la línea uno está explicado aquí:
@@ -137045,14 +137033,19 @@ console.log(company); /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA C
 //////////////////////////////////////////////////////////////////////////////////////
 //Instanciamos la clase CustomMap proveniente del archivo customMap.ts
 
-var CustomMap_1 = require("./CustomMap");
+var CustomMap_1 = require("./CustomMap"); //ESTE ES EL IMPORT DEL MAL CAMINO
+
 
 var customMap = new CustomMap_1.CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class, esta instancia obligatoriamente necesitará un argumento por lo mismo que le hemos colocado argumentos al constructor!
 // customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada y sólo podrán ser utilizadas dentro de la clase
-//Finalmente ejecutamos la función (método) de customMap.addmarkers que es donde tenemos la funcionalidad de las ubicaciones
+// ////////////ESTA SECCIÓN ES PARTE DE LA PARTE MAL IMPLEMENTADA EN CustomMap_Bad.ts//////////////
+// //Finalmente ejecutamos la función (método) de customMap.addmarkers que es donde tenemos la funcionalidad de las ubicaciones
+// customMap.addUserMarker(user)
+// customMap.addCompanyMarker(company)
+// ////////////TERMINA SECCIÓN DE LA PARTE MAL IMPLEMENTADA EN CustomMap_Bad.ts//////////////
 
-customMap.addUserMarker(user);
-customMap.addCompanyMarker(company);
+customMap.addMarker(user);
+customMap.addMarker(company);
 },{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"C:/Users/52556/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -137081,7 +137074,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51216" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58590" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

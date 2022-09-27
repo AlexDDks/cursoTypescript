@@ -35,12 +35,19 @@ console.log(company);
 //////////////////////////////////////////////////////////////////////////////////////
 
 //Instanciamos la clase CustomMap proveniente del archivo customMap.ts
-import { CustomMap } from "./CustomMap";
+import { CustomMap } from "./CustomMap"; //ESTE ES EL IMPORT DEL MAL CAMINO
 const customMap= new CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class, esta instancia obligatoriamente necesitará un argumento por lo mismo que le hemos colocado argumentos al constructor!
 
 // customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada y sólo podrán ser utilizadas dentro de la clase
 
 
-//Finalmente ejecutamos la función (método) de customMap.addmarkers que es donde tenemos la funcionalidad de las ubicaciones
-customMap.addUserMarker(user)
-customMap.addCompanyMarker(company)
+// ////////////ESTA SECCIÓN ES PARTE DE LA PARTE MAL IMPLEMENTADA EN CustomMap_Bad.ts//////////////
+
+// //Finalmente ejecutamos la función (método) de customMap.addmarkers que es donde tenemos la funcionalidad de las ubicaciones
+// customMap.addUserMarker(user)
+// customMap.addCompanyMarker(company)
+
+// ////////////TERMINA SECCIÓN DE LA PARTE MAL IMPLEMENTADA EN CustomMap_Bad.ts//////////////
+
+customMap.addMarker(user)
+customMap.addMarker(company)
