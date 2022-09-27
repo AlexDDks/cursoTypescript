@@ -136900,6 +136900,10 @@ function () {
     };
   }
 
+  User.prototype.markerContent = function () {
+    return "User's name is: " + this.name;
+  };
+
   return User;
 }();
 
@@ -136938,7 +136942,12 @@ function () {
       lat: parseFloat(faker_1.default.address.latitude()),
       lng: parseFloat(faker_1.default.address.longitude())
     };
-  }
+  } // Agregamos el método necesario para que se cumpla que estos pertenezcan a la interfaz. Recordemos que hacemos esto para personalizar el mensaje que será renderizado por el marker cuando se realice el evento de hacer click
+
+
+  Company.prototype.markerContent = function () {
+    return "User's name is: " + this.companyName + ", and the phrase is: " + this.catchPhrase;
+  };
 
   return Company;
 }();
@@ -136986,7 +136995,8 @@ function () {
 
     marker.addListener("click", function () {
       var infoWindow = new google.maps.InfoWindow({
-        content: "Hi world"
+        // Como contenido ahora hemos reemplazado el string y lo que hacemos es ejecutar a la función markerContent del argumento correspondiente, lo cual nos entregará el string personalizado
+        content: instancer.markerContent()
       }); //infoWindow.open recibe las referencias de a qué marcador y mapa nos referimos, por lo que agregamos como argumento el mapa al que le estamos implementando la funcionalidad y el marcador correspondiente.
 
       infoWindow.open(_this.googleMap, marker);
@@ -137013,9 +137023,7 @@ var Company_1 = require("./Company"); //Procedemos a instanciar el User (recorde
 
 
 var user = new User_1.User();
-console.log(user);
-var company = new Company_1.Company();
-console.log(company); /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA CLASE CustomMap/////////////
+var company = new Company_1.Company(); /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA CLASE CustomMap/////////////
 // // // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
 // //La propiedad map espera un argumento que es un div de un html que es donde el mapa va a ser renderizado dentro del documento HTML, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
 // const map = new google.maps.Map(document.getElementById('map') as HTMLElement,
@@ -137074,7 +137082,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58590" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50055" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

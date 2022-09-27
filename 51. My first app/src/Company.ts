@@ -1,6 +1,10 @@
 //Repetimos el proceso que hicimos para crear un User
 import faker from "faker"
-export class Company{
+import {Instancer} from "./CustomMap"//Importamos la interface para darle más pistas a TS de que la clase User satisfaga las condiciones de la interface Instancer
+
+
+export class Company implements Instancer{
+     //implements Instancer le dice a TS que esta clase debe de satisfacer las propiedades de la interface Instancer, así cuando tengamos un error en la instancia de esta clase por ejemplo y nos falte satisfacer alguna propiedad correspondiente, entonces TS nos dirá cuál es es el error y dónde se encuentra, lo cual hace que todo sea relativamente más fácil.
     companyName:string;
     catchPhrase:string;
     location:{
@@ -15,6 +19,12 @@ export class Company{
             lat:parseFloat(faker.address.latitude()),
             lng:parseFloat(faker.address.longitude())
         }
+    }
+
+    // Agregamos el método necesario para que se cumpla que estos pertenezcan a la interfaz. Recordemos que hacemos esto para personalizar el mensaje que será renderizado por el marker cuando se realice el evento de hacer click
+    markerContent():string{
+        return "User's name is: " + this.companyName +
+        ", and the phrase is: " + this.catchPhrase;
     }
 }
 

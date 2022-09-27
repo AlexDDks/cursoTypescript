@@ -8,11 +8,7 @@ import {User} from "./User";
 import {Company} from "./Company";  
 //Procedemos a instanciar el User (recordemos que no podemos utilizar una clase directamente, sino que debe ser instanciada en otra variable)
 const user= new User();
-console.log(user);
-
 const company= new Company();
-console.log(company);
-
 
 /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA CLASE CustomMap/////////////
 
