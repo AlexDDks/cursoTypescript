@@ -136952,17 +136952,19 @@ exports.Company = Company; // // En JS el constructor se coloca como:
 // // Instanciando:
 // const cliente= new Cliente(nombre, fecha, direccion)
 },{"faker":"node_modules/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
-"use strict"; // Acá estamos haciendo una clase que únicamente guarde las propiedades y métodos que necesitamos del objeto global Map. Esto es debido a que si otro ingeniero viene y comienza a trabajar en nuestro proyecto con todos los métodos que residen en esa clase, entonces el resultado podría ser catastrófico y pudiéramos llegar a romper por completo la app
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CustomMap = void 0; // Creamos una clase para exportar que únicamente tenga las propiedades que necesitamos y así esconder el resto de la clase original Map
+exports.CustomMap = void 0; // Acá estamos haciendo una clase que únicamente guarde las propiedades y métodos que necesitamos del objeto global Map. Esto es debido a que si otro ingeniero viene y comienza a trabajar en nuestro proyecto con todos los métodos que residen en esa clase, entonces el resultado podría ser catastrófico y pudiéramos llegar a romper por completo la app
+// Creamos una clase para exportar que únicamente tenga las propiedades que necesitamos y así esconder el resto de la clase original Map
 
 var CustomMap =
 /** @class */
 function () {
-  // En el constructor agregamos como argumento el div, que es lo que tenemos como argumento en el new, con ello podemos hacer nuestro código aún mas reutilizable
+  //Utilizamos el constructor para inicializar y crear el mapa y mostrarlo en pantalla
+  // En el constructor agregamos como argumento el div, que es lo que tenemos como argumento en el new, con ello podemos hacer nuestro código aún mas reutilizable  
   function CustomMap(divId) {
     this.googleMap = new google.maps.Map(document.getElementById(divId), //En el get Element irá lo que coloquemos al instanciar, que será el divId osea "map"
     {
@@ -136972,12 +136974,41 @@ function () {
         lng: 0
       }
     });
-  }
+  } // Lo que hicimos está explicado en la carpeta 45-50, archivo fieldInClases, sobre cómo utilizar el constructor
+  //////////////////MAL CAMINO////////////////////
+  //Comenzaremos a diseñar los marcadores, aunque este es el mal camino:
+  // El enfoque que se le quiere dar es el de agregar dos métodos, uno para cada clase; User y Company. Le decimos que va a ser de ese tipo YA QUE POSTERIORMENTE EN EL index.ts VAMOS A EJECUTAR LOS MÉTODOS Y LOS ARGUMENTOS SERÁN LAS INSTANCIAS DE ESAS 2 CLASES
+  //Se coloca como argumento la instancia, y el tipo va a ser la clase. Sí, la clase(la instancia) tiene como dualidad también ser un "tipo", así que podemos usarlo y al mismo tiempo vamos a tener como return un : void
+  //El nombre del argumento puede ser el que sea, pero el tipo debe ser de su clase correspondiente, porque en el index.ts vamos a ejecutar los métodos y estos van a recibir como argumentos a las instancias de User y Company
+
+
+  CustomMap.prototype.addUserMarker = function (user) {
+    // En el tdf se encuentra una clase llamada market. Cuando queramos crear una instancia de marker, podemos opcionalmente colocar argumentos llamados "opts" que deberían ser conformados por la interface markerOptions(por lo que van entre llaves como objeto literal). El primero es map, el cuál recibe el mapa al que se le añadirá al marcador (ya que en una app podríamos tener diferentes mapas) y la segunda es la posición como objeto literal con lat y lng.
+    //Creamos la instancia del marker(ya que es una clase) y ya tenemos inmediatamente todas las propiedades de Marker, y tendremos como argumentos lo que necesita/solicita la función constructora en el tdf
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: user.location.lat,
+        lng: user.location.lng
+      }
+    });
+  };
+
+  CustomMap.prototype.addCompanyMarker = function (company) {
+    //Repetimos el código:
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: company.location.lat,
+        lng: company.location.lng
+      }
+    });
+  };
 
   return CustomMap;
 }();
 
-exports.CustomMap = CustomMap;
+exports.CustomMap = CustomMap; /////////////////////////////////////////////////
 },{}],"src/index.ts":[function(require,module,exports) {
 "use strict"; /// <reference types="@types/google.maps" />
 // El por qué de la línea uno está explicado aquí:
@@ -136998,11 +137029,11 @@ console.log(user);
 var company = new Company_1.Company();
 console.log(company); /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA CLASE CustomMap/////////////
 // // // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
-// //map espera un argumento que es un div de un html, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
+// //La propiedad map espera un argumento que es un div de un html que es donde el mapa va a ser renderizado dentro del documento HTML, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
 // const map = new google.maps.Map(document.getElementById('map') as HTMLElement,
-// // Abriendo unas nuevas llaves, aclaramos que agregaremos un segundo parámetro
+// // Abriendo unas nuevas llaves, aclaramos que agregaremos un segundo parámetro(la hacemos así porque el segundo argumento es una interface, lo cual tiene su modo de ser ingresado)
 // {
-//     //la clase Map opcionalmente recibe como segundo parámetro el mapOptions que sirve para personalizar el mapa, por lo tanto debemos de ingresarlas desde unas llaves, ya que es un segundo parámetro. El zoom recibe como parámetro un number que es el valor inicial de este.
+//     //la clase Map opcionalmente recibe como segundo parámetro el mapOptions que sirve para personalizar el mapa, por lo tanto debemos de ingresarlas desde unas llaves, ya que es un segundo parámetro. La propiedad zoom recibe como parámetro un number que es el valor inicial de este.
 //     zoom:1,
 //     // Agregaremos otra propiedad llamada center la cual vimos en la clase Map.mapOptions que es un objeto que tiene long y lat como numbers
 //     center:{
@@ -137012,12 +137043,16 @@ console.log(company); /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA C
 // });
 // // La lógica es la siguiente: lo que le demos de argumentos al constructor lo agregará como una propiedad de la clase, en este caso le estamos agregando como primer argumento "map", el cual en el tdf vimos que DEBE DE SER UN ELEMENTO HTML por lo que anteriormente se inicializó como ello. Como segundo argumento se le está agregando un objeto llamado "mapOptions", el cual tiene 2 propiedades que necesitamos: 1)zoom:number y 2:center:lat y lng, todo esto sacado del tdf
 //////////////////////////////////////////////////////////////////////////////////////
-//Instanciamos la clase CustomMap
+//Instanciamos la clase CustomMap proveniente del archivo customMap.ts
 
 var CustomMap_1 = require("./CustomMap");
 
-var customMap = new CustomMap_1.CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class
-// customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada
+var customMap = new CustomMap_1.CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class, esta instancia obligatoriamente necesitará un argumento por lo mismo que le hemos colocado argumentos al constructor!
+// customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada y sólo podrán ser utilizadas dentro de la clase
+//Finalmente ejecutamos la función (método) de customMap.addmarkers que es donde tenemos la funcionalidad de las ubicaciones
+
+customMap.addUserMarker(user);
+customMap.addCompanyMarker(company);
 },{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"C:/Users/52556/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -137046,7 +137081,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58711" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51216" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

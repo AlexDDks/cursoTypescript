@@ -8,17 +8,17 @@
 
 5. We import faker from node modules
 
-6. Because TS is a particullar lenguage, it can be aware about all the variables and returns of the methds that we will use, if not, TS can not check our code, so faker and others libraries of JS do not have annotations and all that information that TS needs, so we need to use "type definition files" which are some kind of "adapter" that tells to TS the information about the type or arguments and returns. Some libraries does includes the type definition file, but in this case, fakee does not, so we need to install it manually. The way we need to go through is: npm install @types/"name of library", following this sintaxis, in our case it must be: npm install @types/faker@5.5.9
+6. Because TS is a particullar lenguage, it can be aware about all the variables and returns of the methds that we will use, if not, TS can not check our code, so faker and others libraries of JS do not have annotations and all that information that TS needs, so we need to use "type definition files" which are some kind of "adapter" that tells to TS the information about the type of the arguments and returns. Some libraries does includes the type definition file, but in this case, fakee does not, so we need to install it manually. The way we need to go through is: npm install @types/"name of library", following this sintaxis, in our case it must be: npm install @types/faker@5.5.9
 
 7. We create the User and Company classes, and we imported them into index.ts
 
 8. We used and API of maps and we added the API key
 
-9. We needed to add manually the support of maps because it comes from an script directly from an HTML file (is going to be added as a global variable i.e. is available everywhere inside of our project without import statements). In other cases such as using NPM we only need to use te normal "import x from "x" " that we have seen. So we installed the regarding type definition file from NPM page.
+9. We needed to add manually the support of maps(tdf) because it comes from an script directly from an HTML file (is going to be added as a global variable i.e. is available everywhere inside of our project without import statements). In other cases such as using NPM we only need to use the normal "import x from "x" " that we have seen. So we installed the regarding type definition file from NPM page.
 We installed the tdf: npm install @types/google.maps and we added at the very first line in the index.ts file a triple slash directive: 
 /// <reference types="@types/google.maps" />You can read about this in the official docs here:
 https://developers.google.com/maps/documentation/javascript/using-typescript#Module_Import
 
 A very important thing is to review what a tdf has inside, so pleas ctrl + clic in the variable to check it.
 
-10. We created a class of CustomMap where there are only a properties available, the other one/s are private in order of avoiding the break of the app due to the use of properties of the global object
+10. We created a class of CustomMap where there are only a few properties available, the other one/s are private in order of avoiding the break of the app due to the use of all the global object

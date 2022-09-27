@@ -18,11 +18,11 @@ console.log(company);
 
 // // // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
 
-// //map espera un argumento que es un div de un html, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
+// //La propiedad map espera un argumento que es un div de un html que es donde el mapa va a ser renderizado dentro del documento HTML, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
 // const map = new google.maps.Map(document.getElementById('map') as HTMLElement,
-// // Abriendo unas nuevas llaves, aclaramos que agregaremos un segundo parámetro
+// // Abriendo unas nuevas llaves, aclaramos que agregaremos un segundo parámetro(la hacemos así porque el segundo argumento es una interface, lo cual tiene su modo de ser ingresado)
 // {
-//     //la clase Map opcionalmente recibe como segundo parámetro el mapOptions que sirve para personalizar el mapa, por lo tanto debemos de ingresarlas desde unas llaves, ya que es un segundo parámetro. El zoom recibe como parámetro un number que es el valor inicial de este.
+//     //la clase Map opcionalmente recibe como segundo parámetro el mapOptions que sirve para personalizar el mapa, por lo tanto debemos de ingresarlas desde unas llaves, ya que es un segundo parámetro. La propiedad zoom recibe como parámetro un number que es el valor inicial de este.
 //     zoom:1,
 //     // Agregaremos otra propiedad llamada center la cual vimos en la clase Map.mapOptions que es un objeto que tiene long y lat como numbers
 //     center:{
@@ -34,7 +34,13 @@ console.log(company);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-//Instanciamos la clase CustomMap
+//Instanciamos la clase CustomMap proveniente del archivo customMap.ts
 import { CustomMap } from "./CustomMap";
-const customMap= new CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class
-// customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada
+const customMap= new CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class, esta instancia obligatoriamente necesitará un argumento por lo mismo que le hemos colocado argumentos al constructor!
+
+// customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada y sólo podrán ser utilizadas dentro de la clase
+
+
+//Finalmente ejecutamos la función (método) de customMap.addmarkers que es donde tenemos la funcionalidad de las ubicaciones
+customMap.addUserMarker(user)
+customMap.addCompanyMarker(company)

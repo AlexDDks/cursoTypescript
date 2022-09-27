@@ -1,13 +1,15 @@
+//SE ESPERA SIEMPRE EN UNA CLASE INICIALIZAR LAS VARIABLES TAN PRONTO SE DECLAREN EN UNA CLASE
+
 // class Vehicle3{ 
 //     color:string;
-//     // Comenzamos a utilizar una función con palabra reservada constuctor, el cual es una función que se ejecuta inmediatamente cuando se instancia la clase. Recibe como argumento, lo que le demos de argumento cuando se instancie la clase
+//     // Comenzamos a utilizar una función con palabra reservada constructor(CUANDO ASIGNAMOS ARGUMENTOS A UNA INSTANCIA, POR EJEMPLO: new Vehicle(color)), el cual es una función que se ejecuta inmediatamente cuando se instancia la clase. Recibe como argumento, lo que le demos de argumento cuando se instancie la clase
 //     constructor(color:string){
 //         this.color=color;
 //     }
 
 //     protected honk():void{
 //     console.log("prueba de honk");
-//     }
+//     } 
 // } 
 
 // // Acá estamos agregando como argumento un valor que utilizará el constructor para una función que nosotros queramos hacer. Esto es para inicializar una variable sin tenerlo que hacer directamente en la clase.
@@ -52,7 +54,7 @@ console.log(vehicle5.color)
 
 // Ejemplo mío
 class Car6 extends Vehicle5{
-    // Obligatoriamente tenemos que poner que sea public para que sea leído fuera del código
+    // Obligatoriamente tenemos que poner que sea public (DEBIDO A QUE ESTA ES LA ESTRUCTURA QUE DEBE DE TENER EL CONSTRUCTOR, SINO DEBERÍAMOS USAR EL PRIMER EJEMPLO DE ESTE DOCUMENTO, NO ES QUE SEA OBLIGATORIO PORQUE DEBEMOS ACLARAR QUE ES PUBLIC SINO QUE ASÍ ES LA ESTRUCTURA DE ESTA FUNCIÓN PARA INICIALIZAR LA PROPIEDAD CORRESPONDIENTE) para que sea leído fuera del código
     constructor(public weigth:number, color:string){
         super(color)
     }
