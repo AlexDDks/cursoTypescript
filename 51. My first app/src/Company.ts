@@ -2,7 +2,6 @@
 import faker from "faker"
 import {Instancer} from "./CustomMap"//Importamos la interface para darle más pistas a TS de que la clase User satisfaga las condiciones de la interface Instancer
 
-
 export class Company implements Instancer{
      //implements Instancer le dice a TS que esta clase debe de satisfacer las propiedades de la interface Instancer, así cuando tengamos un error en la instancia de esta clase por ejemplo y nos falte satisfacer alguna propiedad correspondiente, entonces TS nos dirá cuál es es el error y dónde se encuentra, lo cual hace que todo sea relativamente más fácil.
     companyName:string;
@@ -11,7 +10,7 @@ export class Company implements Instancer{
         lat:number;
         lng:number;
     }
-    // Para instanciarlo utilizamos el constructor
+    // Para inicializar las propiedades utilizamos el constructor
     constructor(){//No ponemos argumentos, ya que eso sería para instanciarlo mediante argumentos mediante el new("acá irían los argumentos")
         this.companyName=faker.company.companyName();
         this.catchPhrase=faker.company.catchPhrase();

@@ -3,13 +3,13 @@ import {Instancer} from "./CustomMap" //Importamos la interface para darle más 
 
 // Le colocamos la palabra reservada export para que esta clase pueda ser importada en nuestro entrypoint
 export class User implements Instancer{
-    //implements Instancer le dice a TS que esta clase debe de satisfacer las propiedades de la interface Instancer, así cuando tengamos un error en la instancia de esta clase por ejemplo y nos falte satisfacer alguna propiedad correspondiente, entonces TS nos dirá cuál es es el error y dónde se encuentra, lo cual hace que todo sea relativamente más fácil.
+    //implements Instancer le dice a TS que esta clase debe de satisfacer las propiedades de la interface Instancer, así cuando tengamos un error en la instancia de esta clase por ejemplo y nos falte satisfacer alguna propiedad correspondiente, entonces TS nos dirá cuál es es el error y dónde se encuentra EXACTAMENTE(en este caso interface Instancer), lo cual hace que todo sea relativamente más fácil.
     name: string;
     location:{
         // En la documentación veremos que el faker entrega un string para las funciones latitud y longitud, por lo que tendremos que hacer la correspondiente conversión de string a number, lo cual hicimos en el constructor
         lat:number;
         lng:number;
-    }
+    };
 
     // En la documentación vamos a encontrar qué modulo utilizar para cada propiedad de nuestra clase, por lo que basta revisarlo para ver cómo llegar a ella.
     
