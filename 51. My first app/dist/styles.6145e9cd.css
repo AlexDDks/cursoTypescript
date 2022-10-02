@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+}
+
+body{
+    width: 100%;
+    /* No puedo resolver que al poner 100vw, el body agarre dimensiones mayores del vw */
+    height: 100vh;
+    background-color: bisque;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    border: 2px red solid;
+    display: flex;
+    position: absolute;
+}
+
+.noMap{
+    width: 50vw;
+    height: 100vh;
+    border: 2px blue solid;
+    position: absolute;
+}
+
+.divNoMap{
+    height: 20vh;
+    border: 2px blue dotted;
+    position: relative;
+    top: 50%;
+    margin-top: -10vh;
+
+}
+
+.map{
+    width: 50vw;
+    height: 50vh;
+    border: 2px rgb(0, 255, 85) dotted;
+    margin-left: 50vw;
+}
+
+
+/*# sourceMappingURL=/styles.6145e9cd.css.map */

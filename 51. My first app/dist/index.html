@@ -1,9 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.6145e9cd.css">
+    <title>Document</title>
+<script src="/styles.6145e9cd.js"></script></head>
 <body>
-    <!-- El div va a ser el argumento del constructor del map de un tamaño de 100 vh, no utilizar % ya que no hemos definido en unidades absolutas el tamaño de la página-->
-    <div id="map" style="height:100vw;"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU"></script>
-    <script src="/src.f10117fe.js"></script>
+    <main>
+        <section class="noMap">
+            <div class="divNoMap">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, aliquid!</p>
+            </div>
+        </section>
+
+        <section class="map">
+            <!-- El div va a ser el argumento del constructor del map de un tamaño de 100 vh, no utilizar % ya que no hemos definido en unidades absolutas el tamaño de la página-->
+            <div class="divMap" id="map" style="height:50vw;"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU"></script>
+            <script src="/src.f10117fe.js"></script>
+        </section>
+    </main>
 </body>
 </html>

@@ -15,24 +15,17 @@ export class Company implements Instancer{
         this.companyName=faker.company.companyName();
         this.catchPhrase=faker.company.catchPhrase();
         this.location={
-            lat:parseFloat(faker.address.latitude()),
-            lng:parseFloat(faker.address.longitude())
+            lat:19.335072,
+            // parseFloat(faker.address.latitude()),
+            lng:-99.186490
+            // parseFloat(faker.address.longitude())
         }
     }
 
     // Agregamos el método necesario para que se cumpla que estos pertenezcan a la interfaz. Recordemos que hacemos esto para personalizar el mensaje que será renderizado por el marker cuando se realice el evento de hacer click
     markerContent():string{
-        return "User's name is: " + this.companyName +
+        return "Company's name is: " + this.companyName +
         ", and the phrase is: " + this.catchPhrase;
     }
 }
 
-// // En JS el constructor se coloca como:
-// function Cliente(nombre, fecha, direccion) // { Esta línea funciona como la palabra reservada constructor(), pero no recibe parámetros ya que se inicializa cuando la clase es instanciada en el index.ts
- 
-//     this._nombre = nombre;
-//     this._fechaNacimiento = fecha;
-//     this._direccion = direccion;
-// }
-// // Instanciando:
-// const cliente= new Cliente(nombre, fecha, direccion)

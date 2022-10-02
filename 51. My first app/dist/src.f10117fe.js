@@ -136894,8 +136894,10 @@ function () {
   function User() {
     this.name = faker_1.default.name.firstName();
     this.location = {
-      lat: parseFloat(faker_1.default.address.latitude()),
-      lng: parseFloat(faker_1.default.address.longitude()) // Utilizamos el parseFloat para convertir a number el string que nos devuelven las funciones latitude y longitude de faker
+      lat: 20.610868,
+      // parseFloat(faker.address.latitude()),
+      lng: -100.405285 // parseFloat(faker.address.longitude())
+      // Utilizamos el parseFloat para convertir a number el string que nos devuelven las funciones latitude y longitude de faker
 
     };
   }
@@ -136934,32 +136936,27 @@ var faker_1 = __importDefault(require("faker"));
 var Company =
 /** @class */
 function () {
-  // Para instanciarlo utilizamos el constructor
+  // Para inicializar las propiedades utilizamos el constructor
   function Company() {
     this.companyName = faker_1.default.company.companyName();
     this.catchPhrase = faker_1.default.company.catchPhrase();
     this.location = {
-      lat: parseFloat(faker_1.default.address.latitude()),
-      lng: parseFloat(faker_1.default.address.longitude())
+      lat: 19.335072,
+      // parseFloat(faker.address.latitude()),
+      lng: -99.186490 // parseFloat(faker.address.longitude())
+
     };
   } // Agregamos el método necesario para que se cumpla que estos pertenezcan a la interfaz. Recordemos que hacemos esto para personalizar el mensaje que será renderizado por el marker cuando se realice el evento de hacer click
 
 
   Company.prototype.markerContent = function () {
-    return "User's name is: " + this.companyName + ", and the phrase is: " + this.catchPhrase;
+    return "Company's name is: " + this.companyName + ", and the phrase is: " + this.catchPhrase;
   };
 
   return Company;
 }();
 
-exports.Company = Company; // // En JS el constructor se coloca como:
-// function Cliente(nombre, fecha, direccion) // { Esta línea funciona como la palabra reservada constructor(), pero no recibe parámetros ya que se inicializa cuando la clase es instanciada en el index.ts
-//     this._nombre = nombre;
-//     this._fechaNacimiento = fecha;
-//     this._direccion = direccion;
-// }
-// // Instanciando:
-// const cliente= new Cliente(nombre, fecha, direccion)
+exports.Company = Company;
 },{"faker":"node_modules/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
 "use strict"; //Ver explicación del código en customMap_Bad.ts
 
@@ -136973,7 +136970,7 @@ var CustomMap =
 function () {
   function CustomMap(divId) {
     this.googleMap = new google.maps.Map(document.getElementById(divId), {
-      zoom: 1,
+      zoom: 1.5,
       center: {
         lat: 0,
         lng: 0
@@ -137023,34 +137020,12 @@ var Company_1 = require("./Company"); //Procedemos a instanciar el User (recorde
 
 
 var user = new User_1.User();
-var company = new Company_1.Company(); /////////TODA ESTA SECCIÓN DE CÓDIGO SE TRASLADÓ A LA CLASE CustomMap/////////////
-// // // Al igual como hicimos con el faker, podemos entrar a las propiedades de este ¿objeto? y en base a eso conocer las propiedades que utilizaremos, en este caso necesitamos el map del maps. En el caso de que los argumentos tengan un ? significa como en las rutas paramétricas, que son opcionales.
-// //La propiedad map espera un argumento que es un div de un html que es donde el mapa va a ser renderizado dentro del documento HTML, por lo que necesitamos en el index.html agregar un div para almacenar el map. Si me doy cuenta tuve un mensaje de error ya que el getEle.... tiene como parámetros un null o un HTMLElement, sin embargo Map sólo tiene como parámetro HTMLElemento, ya no más el null, por lo que se le especifica con el "as HTMLElement" para evitar ese error
-// const map = new google.maps.Map(document.getElementById('map') as HTMLElement,
-// // Abriendo unas nuevas llaves, aclaramos que agregaremos un segundo parámetro(la hacemos así porque el segundo argumento es una interface, lo cual tiene su modo de ser ingresado)
-// {
-//     //la clase Map opcionalmente recibe como segundo parámetro el mapOptions que sirve para personalizar el mapa, por lo tanto debemos de ingresarlas desde unas llaves, ya que es un segundo parámetro. La propiedad zoom recibe como parámetro un number que es el valor inicial de este.
-//     zoom:1,
-//     // Agregaremos otra propiedad llamada center la cual vimos en la clase Map.mapOptions que es un objeto que tiene long y lat como numbers
-//     center:{
-//         lat:0,
-//         lng:0 //El centro del mapa será 0,0.
-//     }
-// });
-// // La lógica es la siguiente: lo que le demos de argumentos al constructor lo agregará como una propiedad de la clase, en este caso le estamos agregando como primer argumento "map", el cual en el tdf vimos que DEBE DE SER UN ELEMENTO HTML por lo que anteriormente se inicializó como ello. Como segundo argumento se le está agregando un objeto llamado "mapOptions", el cual tiene 2 propiedades que necesitamos: 1)zoom:number y 2:center:lat y lng, todo esto sacado del tdf
-//////////////////////////////////////////////////////////////////////////////////////
-//Instanciamos la clase CustomMap proveniente del archivo customMap.ts
+var company = new Company_1.Company(); //Instanciamos la clase CustomMap proveniente del archivo customMap.ts
 
-var CustomMap_1 = require("./CustomMap"); //ESTE ES EL IMPORT DEL MAL CAMINO
-
+var CustomMap_1 = require("./CustomMap");
 
 var customMap = new CustomMap_1.CustomMap("map"); //Colocamos como argumento el map, ya que es el divId correspondiente que se colocó en el class, esta instancia obligatoriamente necesitará un argumento por lo mismo que le hemos colocado argumentos al constructor!
-// customMap.googleMap - Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada y sólo podrán ser utilizadas dentro de la clase
-// ////////////ESTA SECCIÓN ES PARTE DE LA PARTE MAL IMPLEMENTADA EN CustomMap_Bad.ts//////////////
-// //Finalmente ejecutamos la función (método) de customMap.addmarkers que es donde tenemos la funcionalidad de las ubicaciones
-// customMap.addUserMarker(user)
-// customMap.addCompanyMarker(company)
-// ////////////TERMINA SECCIÓN DE LA PARTE MAL IMPLEMENTADA EN CustomMap_Bad.ts//////////////
+// customMap.googleMap- Podemos darnos cuenta que la propiedad a la que hacemos referencia no puede ser llamada debido a que es privada y sólo podrán ser utilizadas dentro de la clase
 
 customMap.addMarker(user);
 customMap.addMarker(company);
@@ -137082,7 +137057,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57808" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58473" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

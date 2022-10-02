@@ -7,7 +7,7 @@ export class User implements Instancer{
     name: string;
     location:{
         // En la documentación veremos que el faker entrega un string para las funciones latitud y longitud, por lo que tendremos que hacer la correspondiente conversión de string a number, lo cual hicimos en el constructor
-        lat:number;
+        lat:number;                                                                                                                                        
         lng:number;
     };
 
@@ -17,8 +17,10 @@ export class User implements Instancer{
     constructor(){
         this.name=faker.name.firstName();
         this.location={
-            lat:parseFloat(faker.address.latitude()),
-            lng:parseFloat(faker.address.longitude())
+            lat:20.610868,
+            // parseFloat(faker.address.latitude()),
+            lng:-100.405285
+            // parseFloat(faker.address.longitude())
             // Utilizamos el parseFloat para convertir a number el string que nos devuelven las funciones latitude y longitude de faker
         }
     }

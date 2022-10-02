@@ -19,7 +19,7 @@ export class CustomMap{
     constructor(divId:string){ 
     this.googleMap=new google.maps.Map(document.getElementById(divId) as HTMLElement,
         {
-        zoom:1,
+        zoom:1.5,
             center:{
             lat:0,
             lng:0 
@@ -34,7 +34,7 @@ addMarker(instancer:Instancer): void{
         position:{
             lat:instancer.location.lat,
             lng:instancer.location.lng
-            }
+            }                                                                                                                                                                          
         });
 
         // Acá comenzamos a agregar la funcionalidad de que cuando hagamos click en los marcadores, salga un TextDecoder. Para ello agregamos como el addListener la funcionalidad de que al hacer click en el marker se ejecute una función. Para que se renderice el texto hacemos uso de la clase InfoWindow que en el tdf vemos que recibe un content que es una propiedad de tipo string(que será el texto a renderizar)
