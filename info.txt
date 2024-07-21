@@ -1,0 +1,5 @@
+1. You must install: npm install -g typescript ts-node that is the setup fot ts
+2. In the upcoming lecture, we will be installing axios to use in our demo project. There is currently a major bug that has broken the last three versions of axios since v1. Until this is officially resolved, you must install the last known working pre-v1 release: 
+npm install axios@0.27.2
+3. with tsc nameOfFile.ts we compile the .ts file and a .js file is automatically created. Then we can execute with node the .js file.
+4. We can use ts-node nameOfFile.ts so that compile and execute the .js file at the time.

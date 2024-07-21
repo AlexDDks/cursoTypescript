@@ -1,0 +1,33 @@
+- Mejorar el mapa
+- react
+- Sql
+- Apis
+- Package?
+- Prettier
+- NeXT typescript
+
+- Scrum?
+
+TAREA:
+
+es decir, en tu codigo, en vez de poner tu la coordenada, la longitud, y limitarlo, toda esa info ya va a venir en ese link. Tu marcador de google se convierte entonces en un link,
+Y que ese sea el marcador con identificador de la clase(si es user x, user y, etc)
+
+Tienes de dos sopas: 
+
+1.- Encuentras còmo hacer que el link consuma toda la info (yo te enviarìa ese link) MEJOR ESTA OPCIÓN
+Este link, lo que tiene dentro es el siguiente objeto:
+
+Latitude  : deg
+[+] Longitude : - deg
+[+] Accuracy  : 16.524 m
+[+] Altitude  : Not Available
+[+] Direction : Not Available
+[+] Speed     : Not Available
+me conviene màs el link, porque es màs automatizado
+
+
+2.- pones objetos para ir colectando manualmente cada info de cada usuario(base de datos)
+
+
+

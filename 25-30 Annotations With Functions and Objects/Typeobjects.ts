@@ -11,12 +11,12 @@ const profile={
   }
 };
 
-//Utilizamos el destructuring para jalar la propiedad age
+//Utilizamos el destructuring para jalar la propiedad age. (El destructuring crea una variable de valor igual al índice(en arrays), o del nombre de la propiedad que estaremos invocando)
 const {age}:{age:number}=profile
 console.log(age)
 
-//Utilizamos el destructuring para jalar la propiedad lat y long dentro del objeto coords que está a su vez dentro del objeto profile. Utilizamos la estructura del profile para hacer las anotaciones correspondientes, esto nos sirve debido a que qué tal queremos hacer diferentes destructuring y estos son de tipos diferentes
-const{coords:{lat, long}} : {coords:{lat:number, long:number}}= profile
+//Utilizamos el destructuring para jalar la propiedad lat y long dentro del objeto coords que está a su vez dentro del objeto profile. Utilizamos la estructura del objeto literal para hacer las anotaciones correspondientes, esto nos sirve debido a que qué tal queremos hacer diferentes destructuring y estos son de tipos diferentes
+const{coords:{lat, long}} : {coords:{lat:number; long:number}}= profile
 console.log(lat,long);
 
 // //ERROR DEL EJEMPLO ANTERIOR

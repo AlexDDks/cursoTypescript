@@ -7,7 +7,7 @@ const logNumber1:(i:number)=>void = (i:number) => {
 //Otro ejemplo, acá la anotación es para la función, no para la variable
 const add1 = (a:number , b:number):number =>{
   //Se ha agregado la anotación para los argumentos y después de los : para el return que igualmente es un número
-return a + b;
+  return a + b;
 };
 
 //Otro ejemplo para funciones no asignada

@@ -1,6 +1,6 @@
 //Una clase es un Blueprint para crear un objeto con algunos campos(valores) y métodos(funciones) para representar "algo"
 
-//Creamos una clase que represente a un vehículo, con mayúscula en la primera
+//Creamos una clase que represente a un vehículo, con mayúscula en la primera letra
 class Vehicle{
   //Dentro de la clase vamos a definir varios métodos. Por ejemplo, ¿recuerdas los métodos de strings y arrays y eso? 
   
@@ -26,14 +26,14 @@ vehicle.honk();
 
 
 //Creamos una nueva clase llamada Car que queremos que tena los mismos métodos que el de Vehicle, por lo tanto podemos copiar todo el código de nuevo, o lo mas apropiado: extender los métodos de la clase Vehicle en la clase Car, prácticamente se "copia y pega el código"
-class Car extends Vehicle{}
+class Carx extends Vehicle{}
 
 // Normalmente se le dice a estas clases que son extensiones de otras; "Hijos", osea la clase Car es una clase hija de la clase padre Vehicle
 
 // Instanciamos
-const car= new Car();
-car.drive()
-car.honk();
+const carx= new Carx();
+carx.drive()
+carx.honk();
 //Como podemos notar, tenemos ahora todos los métodos de Vehicle en Car, podemos en su momento superponer los métodos si redefinimos estos en una segunda clase que se encuentre líneas debajo del código que hemos superpuesto (pisado)
 
 

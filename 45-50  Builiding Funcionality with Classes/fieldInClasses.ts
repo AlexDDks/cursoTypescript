@@ -2,7 +2,7 @@
 
 // class Vehicle3{ 
 //     color:string;
-//     // Comenzamos a utilizar una función con palabra reservada constructor(CUANDO ASIGNAMOS ARGUMENTOS A UNA INSTANCIA, POR EJEMPLO: new Vehicle(color)), el cual es una función que se ejecuta inmediatamente cuando se instancia la clase. Recibe como argumento, lo que le demos de argumento cuando se instancie la clase
+//     // Comenzamos a utilizar una función con palabra reservada constructor(CUANDO ASIGNAMOS ARGUMENTOS A UNA INSTANCIA, POR EJEMPLO: new Vehicle(color)), el cual es una función que se ejecuta inmediatamente cuando se instancia la clase. Recibe como argumento una propiedad que creará en la clase, cuyo valor es lo que le demos de argumento al instanciar la clase, en este caso se creará color:"orange"
 //     constructor(color:string){
 //         this.color=color;
 //     }
@@ -59,5 +59,7 @@ class Car6 extends Vehicle5{
         super(color)
     }
 }
+
+//Ahora al instanciar se esperan 2 argumentos, el primero un number y el segundo un string.
 const car6= new Car6(1000, "black")
 console.log(car6.weigth, car6.color);

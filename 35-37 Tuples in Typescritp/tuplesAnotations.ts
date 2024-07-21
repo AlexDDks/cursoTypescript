@@ -1,4 +1,4 @@
-// A diferencia de los arrays las tuplas contiene múltiples propiedades para describir una cosa
+// A diferencia de los arrays las tuplas contiene múltiples valores de propiedades para describir una cosa, sin tener la propiedad en Sí
 
 // Digamos que si partimos de un objeto literal con las siguientes propiedades y valores:
 const coke={

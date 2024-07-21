@@ -1,6 +1,6 @@
 //Las interfaces crean un nuevo tipo dentro de una aplicación. De la misma manera que tenemos string o booolean, estamos creando un tipo nuevo,es decir; es un tipo que vamos a personalizar nosotros mismos.
 
-//Definimos un objeto que represente a un auto
+//Definimos un objeto que represente a un auto (ya hay inferencia de TS)
 const oldCivic={
   nombre: 'Civic',
   año: 2000,
@@ -9,11 +9,11 @@ const oldCivic={
 
 //Definimos una función que opere sobre este objeto y creamos las anotaciones correspondientes de los argumentos para un objeto literal. Esto funciona pero no es lo más adecuado ya que imagínense que tengamos una cantidad grande de propiedades
 const printVehicle= (vehicle: { nombre:string; año:number; funciona:boolean }):void =>  {
-console.log("Name: "+ vehicle.nombre);
+console.log("Name: "+ vehicle.nombre); // No utilizamos el .this, debido a que ya no estamos en el mismo bloque de código que el objeto literal
 
-//COMENZAMOS A UTILIZAR LA INTERFACE, REPETIMOS EL CÓDIGO ANTERIOR PARA UTiLIZAR ESE EJEMPLO:
+//COMENZAMOS A UTILIZAR LA INTERFACE, REPETIMOS EL CÓDIGO ANTERIOR PARA UTILIZAR ESE EJEMPLO:
 
-//Cada que creamos un nuevo tipo, comenzamos con la letra inicial del nombre de esta en mayúsculas, colocamos posteriormente el tipo de valores que esperamos tener en esta interfaz, divido mediante punto y coma cada uno
+//Cada que creamos un nuevo tipo(interface), comenzamos con la letra inicial del nombre de esta en mayúsculas, colocamos posteriormente el tipo de valores que esperamos tener en esta interfaz, divido mediante punto y coma cada uno
 interface Vehicle{
 ////Acá he comentado las otras propiedades de Vehicle, para poder utilizar la función printVehicle1 para declarar drink, ya que drink tiene otras propiedades, pero en ella se encuentra summary, lo cual comparte con el objeto oldCivi1
   // nombre: string;
