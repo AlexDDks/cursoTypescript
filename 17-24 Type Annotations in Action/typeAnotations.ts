@@ -1,8 +1,8 @@
-//A la variable apples se le asigna un valor de tipo number
+//A la variable apples se le asigna una anotación de tipo number
 let apples:number =9;
 
 //Así sucesivamente
-let speed:string= "19km/k";
+let speed:string= "19km/h";
 
 let boolean:boolean =true;
 
@@ -10,7 +10,7 @@ let nothingMuch:null = null;
 
 let nothing:undefined=undefined
 
-let now: Date= new Date()
+let now:Date= new Date()
 
 
 //ARRAYS/////////////////////
@@ -27,6 +27,7 @@ let buleano:boolean[]=[true, false]
   class Car{
 
   }
+// Estamos asignando el tipo como una instancia de Car
 let car: Car
 
 //OBJECT LITERAL
@@ -37,12 +38,14 @@ let point:{x:number; y:number}={
 }
 
 //FUNCTION (SIEMPRE UTILIZAN ANOTACIONES)
-//Siempre utilizan ya que en algunos casos como en funciones, TS no avisa que cometimos el error de no colocar un RETURN, por lo que podríamos no encontrar el bug
+//Siempre utilizan ya que en algunos casos como en funciones, TS no avisa que cometimos el error de no colocar un RETURN, por lo que podríamos no encontrar el bug. Se pueden asignar de 2 maneras diferentes como podemos ver:
 //A la variable logNumber(no a la función) se le asigna un valor de los argunmentos de tipo number y un retorno de tipo nunguno (void); :(i:number)=>void 
+// 1.- SE LE LLAMA :Anotación del tipo de la variable
 const logNumber:(i:number)=>void = (i:number) => {
   console.log(i);
 }
-//Otro ejemplo, acá la anotación es para la función(sus argumentos y su return), no para la variable
+// 2.-
+//Otro ejemplo, acá la anotación es para la función(sus argumentos y su return), no para la variable. Se le llama: Anotación del tipo de la función
 const add = (a:number , b:number):number =>{
   //Se ha agregado la anotación para los argumentos y después de los : para el return que igualmente es un número
 return a + b;
@@ -53,12 +56,13 @@ return a + b;
 //Sabemos que en muchos casos no necesitaremos anotaciones gracias a la type inference. Esta funciona cuando una variable es inicializada en la misma expresión o línea, prácticamente funciona todo el tiempo, TS intentará inferir de qué tipo de valor se tratan cuando trabajamos con uno
 
 //WHEN TO USE ANNOTATIONS? WHEN INFERENCE DOES NOT WORK?
-//1) FUNCTION THAT RETURNS THE "any" TYPE
+//1) FUNCTION THAT RETURNS THE "any" TYPE. El tipo any en este caso se refiere a que en función de la entrada que le demos a la función parse(), nos puede retornar a la salida diferentes tipos, number, string, etc... Por lo tanto el sistema no puede inferir un sólo tipo específico. Any ES UN TIPO DE DATO, NO OLVIDAR ESO. Lo importante es evitar este tipo lo más que se pueda
+
 //EJEMPLO CON ERROR
 const json='{"x":10, "y":20}';
 const coordinates= JSON.parse(json);
 console.log(coordinates)
-//Tenemos el tipo "any" debido a que la salida de la función, o el valor que recibirá la variable coordinates puede ser de diferentes tipos en función de la entrada, por lo que debemos utilizar anotaciones
+
 //Para agregar una anotación, utilizamos la forma de objeto literal= const coordinates:{x:number; y:number}= JSON.parse(json);
 //CORREGIDO
 const json1='{"x":10, "y":20}';
