@@ -1,0 +1,11 @@
+1. Instalar parcel bundler, que compila el código TS y lo transforma en JS, para que pueda ejecutarse en el navegador. Nuestro entry point va a ser un HTML, pero tendrá scripts con código TS
+
+2. Correr en terminal npx parcel index.html ó como ya instalamos el parcel bundler: parcel index.html
+
+3. Vamos a tener 3 clases/entidades, una para usuario, compañia y mapa. Las cuales se van a integrar a un documento principal index.ts
+
+4. Integramos la Api key de maps
+
+5. Instalamos el type definition file npm install @types/google.maps y esto al inicio : /// <reference types="@types/google.maps" />
+
+6. 
