@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px blue solid;
+    height: 100vh;
+}
+#map{
+    width: 500px;
+    height: 500px;
+    border: 2px red solid;
+
+}
+
+/*# sourceMappingURL=/51maps.9ad09f98.css.map */

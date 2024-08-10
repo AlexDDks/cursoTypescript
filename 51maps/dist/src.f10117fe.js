@@ -22690,7 +22690,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.User = void 0;
 // Faker is a library that "fakes" data
 var faker_1 = require("@faker-js/faker");
-// The class has two parameters, name and location
+// The class has two parameters, name and location and a method, that must be required. The implements are used in order to a class achieve the requirements of an interface
 var User = /** @class */function () {
   // The constructor is executed, when the class is instanced
   function User() {
@@ -22702,6 +22702,10 @@ var User = /** @class */function () {
       lng: parseFloat(faker_1.faker.address.longitude())
     };
   }
+  User.prototype.markerContent = function () {
+    return "User name: ".concat(this.name);
+  };
+  ;
   return User;
 }();
 exports.User = User;
@@ -22714,7 +22718,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.Company = void 0;
 // Faker is a library that "fakes" data
 var faker_1 = require("@faker-js/faker");
-// The class has tree parameters
+// The class has three parameters, name and location and a method, that must be required. The implements are used in order to a class achieve the requirements of an interface
 var Company = /** @class */function () {
   // The constructor is executed, when the class is instanced
   function Company() {
@@ -22727,6 +22731,10 @@ var Company = /** @class */function () {
       lng: parseFloat(faker_1.faker.address.longitude())
     };
   }
+  Company.prototype.markerContent = function () {
+    return "Company name: ".concat(this.companyName);
+  };
+  ;
   return Company;
 }();
 exports.Company = Company;
@@ -22737,28 +22745,47 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CustomMap = void 0;
-// Creating the class Custom Map
+// Creating the CustomMap class to encapsulate the Google Map functionality
 var CustomMap = /** @class */function () {
-  // The constructor receives one parameter that is a HTML Element
+  // The constructor receives a parameter, divId, which is the ID of an HTML element.
+  // The type string is required here to ensure the correct type is passed.
+  // It initializes the googleMap property with a new Map instance.
   function CustomMap(divId) {
-    // The propertie googleMap creates an instance ob the object Map. Reveives the HTML element, and some other parameters defined by documentation. This is the instance that contains the map and has many methods for working with it
+    // Type assertion (as HTMLElement) ensures that the element is treated as an HTML element
+    // The types for lat and lng are inferred here as numbers
     this.googleMap = new google.maps.Map(document.getElementById(divId), {
-      zoom: 9,
+      zoom: 2,
+      // Initial zoom level for the map
       center: {
-        lat: 17.1583,
-        lng: -92.3175
+        lat: 17.15,
+        // Initial latitude for the map center
+        lng: -92.31 // Initial longitude for the map center
       }
     });
   }
-  // The method addMarker receives a parameter of the type Mappeable and doesn't returns anything. Also creates an instance of the class Marker
+  // The addMarker method adds a marker to the map at the specified location.
+  // It accepts a Mappeable object and uses its location to place the marker.
+  // The return type void is specified explicitly to indicate that this method does not return a value.
   CustomMap.prototype.addMarker = function (mappeable) {
-    new google.maps.Marker({
-      // At this point googleMap already exists because the constructor has benn executed. And we can use this to access to properties and methods inside any place of this clase
+    var _this = this;
+    var marker = new google.maps.Marker({
       map: this.googleMap,
+      // Reference to the map where the marker will be added
       position: {
+        // The types for lat and lng are inferred from the Mappeable interface
         lat: mappeable.location.lat,
-        lng: mappeable.location.lng
+        // Latitude for the marker position
+        lng: mappeable.location.lng // Longitude for the marker position
       }
+    });
+    // Based on documentation: here is a listener over the markers, every time the user clicks over there, an instance of infoWindow is created with a defined content      
+    marker.addListener('click', function () {
+      var infoWindow = new google.maps.InfoWindow({
+        // The content is part of the instance of user or company or anything that is passed to the function addMarker. Its definition is into the respective class 
+        content: mappeable.markerContent()
+      });
+      // This is part of documentation
+      infoWindow.open(_this.googleMap, marker);
     });
   };
   return CustomMap;
@@ -22808,7 +22835,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50406" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50206" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
